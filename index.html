@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>智慧农业控制系统 - 项目文档</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="基于OpenHarmony的智慧农业控制系统项目文档">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/style.min.css">
+  <style>
+    :root {
+      --theme-color: #42b983;
+    }
+    body, .sidebar, .search, .content, .markdown-section code {
+      transition: background-color 0.3s ease;
+    }
+
+    /* sidebar toggle button: pinned to bottom of sidebar */
+    .sidebar-toggle {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      top: auto;
+      width: 300px;
+      height: 44px;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      z-index: 30;
+      background: var(--background, #fff);
+      border-top: 1px solid var(--borderColor, rgba(0,0,0,0.07));
+      border-bottom: none;
+      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
+    body.close .sidebar-toggle {
+      width: auto;
+      border-top: none;
+      background: transparent;
+      transform: translateX(0);
+    }
+
+    /* leave room at the bottom so content doesn't hide behind toggle */
+    .sidebar {
+      padding-top: 0;
+      padding-bottom: 50px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      transform: translateX(0);
+    }
+
+    /* slide out when closed */
+    body.close .sidebar {
+      transform: translateX(-300px);
+    }
+
+    /* content area: override theme's `left` positioning with smooth transition */
+    .content {
+      left: 300px;
+      transition: left 0.3s ease, background-color 0.3s ease;
+    }
+    body.close .content {
+      left: 0;
+      transition: left 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* mobile: override theme's transform approach */
+    @media screen and (max-width: 768px) {
+      .content {
+        left: 0;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      body.close .content {
+        left: 0;
+        transform: translateX(0);
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">加载中...</div>
+  <script>
+    window.$docsify = {
+      name: '智慧农业控制系统',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      search: {
+        placeholder: '搜索文档',
+        noData: '没有找到结果',
+        depth: 3
+      },
+      auto2top: true,
+      darklightTheme: {
+        defaultTheme: 'auto',
+        siteFont: 'Source Sans Pro, Helvetica Neue, Arial, sans-serif',
+        dark: {
+          accent: '#42d392',
+          toogleBackground: '#ffffff',
+          background: '#1e1e1e',
+          textColor: '#b4b4b4',
+          codeTextColor: '#ffffff',
+          codeBackgroundColor: '#2e2e2e',
+          borderColor: '#444',
+          blockQuoteColor: '#858585',
+          highlightColor: '#d22778',
+          sidebarSublink: '#b4b4b4',
+          codeTypeColor: '#ffffff',
+          coverBackground: 'linear-gradient(to left bottom, hsl(118, 50%, 30%) 0%, hsl(180, 50%, 30%) 100%)',
+          toogleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3/icons/sun.svg)'
+        },
+        light: {
+          accent: '#42b983',
+          toogleBackground: '#091a28',
+          background: '#ffffff',
+          textColor: '#34495e',
+          codeTextColor: '#525252',
+          codeBackgroundColor: '#f8f8f8',
+          borderColor: 'rgba(0,0,0,0.07)',
+          blockQuoteColor: '#858585',
+          highlightColor: '#d22778',
+          sidebarSublink: '#505d6b',
+          codeTypeColor: '#091a28',
+          coverBackground: 'linear-gradient(to left bottom, hsl(118, 50%, 80%) 0%, hsl(180, 50%, 80%) 100%)',
+          toogleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@3/icons/moon.svg)'
+        }
+      }
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/index.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+</body>
+</html>

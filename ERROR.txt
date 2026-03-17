@@ -1,0 +1,23 @@
+> hvigor ERROR: Error [RollupError]: Could not resolve "../../../../design-system/foundation/button/UiButton" from "entry/src/main/ets/pages/Index.ets"
+    at error (C:\Program Files\Huawei\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\node_modules\@ohos\hvigor-arkts-base\node_modules\rollup\dist\shared\rollup.js:215:30)
+    at ModuleLoader.handleInvalidResolvedId (C:\Program Files\Huawei\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\node_modules\@ohos\hvigor-arkts-base\node_modules\rollup\dist\shared\rollup.js:27148:24)
+    at C:\Program Files\Huawei\DevEco Studio\tools\hvigor\hvigor-ohos-plugin\node_modules\@ohos\hvigor-arkts-base\node_modules\rollup\dist\shared\rollup.js:27110:28 {
+  code: 'UNRESOLVED_IMPORT',
+  exporter: '../../../../design-system/foundation/button/UiButton',
+  id: 'D:\\WorkSpace\\Projects\\HarmoAgri\\entry\\src\\main\\ets\\pages\\Index.ets',
+  watchFiles: [
+    'D:\\WorkSpace\\Projects\\HarmoAgri\\entry\\.preview\\default\\intermediates\\res\\default\\ResourceTable.txt',
+    'D:\\WorkSpace\\Projects\\HarmoAgri\\entry\\oh-package.json5',
+    'D:\\WorkSpace\\Projects\\HarmoAgri\\entry\\src\\main\\ets\\entrybackupability\\EntryBackupAbility.ets',
+    'D:\\WorkSpace\\Projects\\HarmoAgri\\entry\\src\\main\\ets\\pages\\Index.ets',
+    'D:\\WorkSpace\\Projects\\HarmoAgri\\entry\\src\\main\\ets\\entryability\\EntryAbility.ets'
+  ]
+}
+> hvigor ERROR: Failed :entry:default@PreviewArkTS... 
+> hvigor ERROR: Compilation failed
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+
+> hvigor ERROR: BUILD FAILED in 5 s 86 ms 

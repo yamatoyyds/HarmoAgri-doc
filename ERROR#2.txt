@@ -1,0 +1,73 @@
+"C:\Program Files\Huawei\DevEco Studio\tools\node\node.exe" "C:\Program Files\Huawei\DevEco Studio\tools\hvigor\bin\hvigorw.js" --mode module -p module=entry@default -p product=default -p pageType=page -p compileResInc=true -p requiredDeviceType=phone -p previewMode=true -p buildRoot=.preview PreviewBuild --watch --analyze=normal --parallel --incremental --daemon
+> hvigor UP-TO-DATE :entry:default@PreBuild...  
+> hvigor Finished :entry:default@CreateModuleInfo... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@MergeProfile...  
+> hvigor UP-TO-DATE :entry:default@CreateBuildProfile...  
+> hvigor Finished :entry:default@PreCheckSyscap... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@GeneratePkgContextInfo...  
+> hvigor UP-TO-DATE :entry:default@ProcessProfile...  
+> hvigor UP-TO-DATE :entry:default@ProcessRouterMap...  
+> hvigor UP-TO-DATE :entry:default@ProcessShareConfig...  
+> hvigor Finished :entry:default@ProcessStartupConfig... after 2 ms 
+> hvigor Finished :entry:default@PreviewProcessResource... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@GenerateLoaderJson...  
+> hvigor UP-TO-DATE :entry:default@PreviewCompileResource...  
+> hvigor Finished :entry:default@PreviewHookCompileResource... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@CopyPreviewProfile...  
+> hvigor Finished :entry:default@ReplacePreviewerPage... after 1 ms 
+> hvigor Finished :entry:buildPreviewerResource... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@PreviewUpdateAssets...  
+> hvigor ERROR: Failed :entry:default@PreviewArkTS... 
+> hvigor ERROR: 10605040 ArkTS Compiler Error
+Error Message: Object literals cannot be used as type declarations (arkts-no-obj-literals-as-types) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:64:43
+10605043 ArkTS Compiler Error
+Error Message: Array literals must contain elements of only inferrable types (arkts-no-noninferrable-arr-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:64:77
+10605038 ArkTS Compiler Error
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:65:5
+10605038 ArkTS Compiler Error
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:66:5
+10605038 ArkTS Compiler Error
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:67:5
+10605038 ArkTS Compiler Error
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:68:5
+10605038 ArkTS Compiler Error
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:69:5
+10605038 ArkTS Compiler Error
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:70:5
+10605040 ArkTS Compiler Error
+Error Message: Object literals cannot be used as type declarations (arkts-no-obj-literals-as-types) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:557:57
+10605040 ArkTS Compiler Error
+Error Message: Object literals cannot be used as type declarations (arkts-no-obj-literals-as-types) At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:1227:48
+10505001 ArkTS Compiler Error
+Error Message: ';' expected. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:459:12
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:440:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:459:13
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:581:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:582:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:729:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:730:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:847:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:960:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:961:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:1082:5
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:1206:5
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+
+> hvigor ERROR: BUILD FAILED in 7 s 197 ms 
+
+Process finished with exit code -1

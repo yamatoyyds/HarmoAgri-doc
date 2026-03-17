@@ -1,0 +1,33 @@
+"C:\Program Files\Huawei\DevEco Studio\tools\node\node.exe" "C:\Program Files\Huawei\DevEco Studio\tools\hvigor\bin\hvigorw.js" --mode module -p module=entry@default -p product=default -p pageType=page -p compileResInc=true -p requiredDeviceType=phone -p previewMode=true -p buildRoot=.preview PreviewBuild --watch --analyze=normal --parallel --incremental --daemon
+> hvigor UP-TO-DATE :entry:default@PreBuild...  
+> hvigor Finished :entry:default@CreateModuleInfo... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@MergeProfile...  
+> hvigor UP-TO-DATE :entry:default@CreateBuildProfile...  
+> hvigor Finished :entry:default@PreCheckSyscap... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@GeneratePkgContextInfo...  
+> hvigor UP-TO-DATE :entry:default@ProcessProfile...  
+> hvigor UP-TO-DATE :entry:default@ProcessRouterMap...  
+> hvigor UP-TO-DATE :entry:default@ProcessShareConfig...  
+> hvigor Finished :entry:default@ProcessStartupConfig... after 3 ms 
+> hvigor Finished :entry:default@PreviewProcessResource... after 1 ms 
+> hvigor UP-TO-DATE :entry:default@GenerateLoaderJson...  
+> hvigor Finished :entry:default@PreviewCompileResource... after 268 ms 
+> hvigor Finished :entry:default@PreviewHookCompileResource... after 1 ms 
+> hvigor Finished :entry:default@CopyPreviewProfile... after 6 ms 
+> hvigor Finished :entry:default@ReplacePreviewerPage... after 1 ms 
+> hvigor Finished :entry:buildPreviewerResource... after 1 ms 
+> hvigor Finished :entry:default@PreviewUpdateAssets... after 3 ms 
+> hvigor ERROR: Failed :entry:default@PreviewArkTS... 
+> hvigor ERROR: 10505001 ArkTS Compiler Error
+Error Message: ';' expected. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:465:12
+10905209 ArkTS Compiler Error
+Error Message: Only UI component syntax can be written here. At File: D:/WorkSpace/Projects/HarmoAgri/entry/src/main/ets/pages/Index.ets:465:13
+
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --debug option to get more log output.
+
+> hvigor ERROR: BUILD FAILED in 7 s 196 ms 
+
+Process finished with exit code -1
