@@ -18,6 +18,10 @@
       --surface-color: var(--background, #ffffff);
       --border-color: var(--borderColor, rgba(0, 0, 0, 0.07));
       --focus-ring: 0 0 0 3px rgba(66, 185, 131, 0.24);
+      --control-size: 3rem;
+      --control-gap: 0.75rem;
+      --control-offset-x: calc(0.75rem + env(safe-area-inset-left));
+      --control-offset-y: calc(0.75rem + env(safe-area-inset-top));
     }
 
     html {
@@ -78,12 +82,12 @@
 
     .sidebar-toggle {
       position: fixed;
-      top: calc(0.75rem + env(safe-area-inset-top));
-      left: calc(0.75rem + env(safe-area-inset-left));
+      top: var(--control-offset-y);
+      left: calc(var(--sidebar-width) - var(--control-size) - var(--control-gap));
       bottom: auto;
-      width: 3rem;
-      min-width: 3rem;
-      height: 3rem;
+      width: var(--control-size);
+      min-width: var(--control-size);
+      height: var(--control-size);
       padding: 0.625rem;
       box-sizing: border-box;
       display: inline-flex;
@@ -98,6 +102,10 @@
       transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
     }
 
+    body.close .sidebar-toggle {
+      left: var(--control-offset-x);
+    }
+
     .sidebar-toggle span {
       bottom: auto;
       left: auto;
@@ -105,6 +113,43 @@
 
     .sidebar-toggle:hover {
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+    }
+
+    #docsify-darklight-theme {
+      position: fixed;
+      top: var(--control-offset-y);
+      right: calc(0.75rem + env(safe-area-inset-right));
+      left: auto;
+      width: var(--control-size);
+      height: var(--control-size);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      border-radius: 0.9rem;
+      background: var(--surface-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      z-index: 40;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    #docsify-darklight-theme:hover {
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+    }
+
+    #docsify-darklight-theme:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    #docsify-darklight-theme p {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin: 0;
+      color: transparent;
+      pointer-events: none;
     }
 
     .sidebar-toggle:focus-visible,
@@ -163,6 +208,10 @@
         width: var(--sidebar-width-tablet);
       }
 
+      .sidebar-toggle {
+        left: calc(var(--sidebar-width-tablet) - var(--control-size) - var(--control-gap));
+      }
+
       .content {
         left: var(--sidebar-width-tablet);
       }
@@ -195,7 +244,11 @@
       }
 
       .sidebar-toggle {
-        left: calc(0.75rem + env(safe-area-inset-left));
+        left: var(--control-offset-x);
+      }
+
+      #docsify-darklight-theme {
+        right: calc(0.75rem + env(safe-area-inset-right));
       }
     }
 
@@ -230,6 +283,7 @@
 
       var sidebar = document.querySelector('.sidebar');
       if (sidebar) {
+        sidebar.id = 'main-sidebar';
         sidebar.setAttribute('role', 'navigation');
         sidebar.setAttribute('aria-label', '文档目录');
       }
@@ -238,11 +292,21 @@
       if (toggle) {
         toggle.setAttribute('aria-label', '切换文档目录');
         toggle.setAttribute('title', '切换文档目录');
+        toggle.setAttribute('aria-controls', 'main-sidebar');
       }
 
       var searchInput = document.querySelector('.search input');
       if (searchInput) {
         searchInput.setAttribute('aria-label', '搜索文档');
+        searchInput.setAttribute('autocomplete', 'off');
+      }
+
+      var themeToggle = document.getElementById('docsify-darklight-theme');
+      if (themeToggle) {
+        themeToggle.setAttribute('role', 'button');
+        themeToggle.setAttribute('tabindex', '0');
+        themeToggle.setAttribute('aria-label', '切换亮暗主题');
+        themeToggle.setAttribute('title', '切换亮暗主题');
       }
     }
 
