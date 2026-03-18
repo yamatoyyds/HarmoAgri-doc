@@ -14,12 +14,12 @@
       --theme-color: #42b983;
       --sidebar-width: 19rem;
       --sidebar-width-tablet: 17rem;
-      --header-offset: calc(4rem + env(safe-area-inset-top));
+      --header-offset: calc(4.75rem + env(safe-area-inset-top));
       --surface-color: var(--background, #ffffff);
       --border-color: var(--borderColor, rgba(0, 0, 0, 0.07));
       --focus-ring: 0 0 0 3px rgba(66, 185, 131, 0.24);
       --control-size: 3rem;
-      --control-gap: 0.75rem;
+      --control-gap: 1rem;
       --control-offset-x: calc(0.75rem + env(safe-area-inset-left));
       --control-offset-y: calc(0.75rem + env(safe-area-inset-top));
     }
@@ -73,7 +73,7 @@
 
     .sidebar {
       width: var(--sidebar-width);
-      padding-top: calc(1rem + env(safe-area-inset-top));
+      padding-top: calc(var(--control-size) + var(--control-gap) + 1rem + env(safe-area-inset-top));
       padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
       overscroll-behavior: contain;
       transition: transform 0.3s ease, background-color 0.3s ease;
@@ -83,7 +83,7 @@
     .sidebar-toggle {
       position: fixed;
       top: var(--control-offset-y);
-      left: calc(var(--sidebar-width) - var(--control-size) - var(--control-gap));
+      left: var(--control-offset-x);
       bottom: auto;
       width: var(--control-size);
       min-width: var(--control-size);
@@ -96,14 +96,11 @@
       border: 1px solid var(--border-color);
       border-radius: 0.9rem;
       z-index: 40;
+      background: var(--surface-color);
       background: color-mix(in srgb, var(--surface-color) 92%, transparent);
       backdrop-filter: blur(8px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
-    }
-
-    body.close .sidebar-toggle {
-      left: var(--control-offset-x);
     }
 
     .sidebar-toggle span {
@@ -113,6 +110,11 @@
 
     .sidebar-toggle:hover {
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+    }
+
+    .sidebar-toggle:active,
+    #docsify-darklight-theme:active {
+      transform: scale(0.97);
     }
 
     #docsify-darklight-theme {
@@ -199,17 +201,23 @@
     }
 
     .markdown-section pre,
-    .markdown-section code {
+    .markdown-section pre code {
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    .markdown-section pre {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .markdown-section :not(pre) > code {
       overflow-wrap: anywhere;
     }
 
     @media screen and (max-width: 1100px) {
       .sidebar {
         width: var(--sidebar-width-tablet);
-      }
-
-      .sidebar-toggle {
-        left: calc(var(--sidebar-width-tablet) - var(--control-size) - var(--control-gap));
       }
 
       .content {
@@ -274,6 +282,30 @@
   <div id="app">加载中...</div>
   <script>
     function enhanceDocsifyLayout() {
+      function updateThemeMeta() {
+        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (!metaTheme) {
+          return;
+        }
+
+        var background = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+        if (background) {
+          metaTheme.setAttribute('content', background);
+        }
+      }
+
+      function updateSidebarState() {
+        var currentToggle = document.querySelector('.sidebar-toggle');
+        if (!currentToggle) {
+          return;
+        }
+
+        var isExpanded = !document.body.classList.contains('close');
+        currentToggle.setAttribute('aria-expanded', String(isExpanded));
+        currentToggle.setAttribute('aria-label', isExpanded ? '收起文档目录' : '展开文档目录');
+        currentToggle.setAttribute('title', isExpanded ? '收起文档目录' : '展开文档目录');
+      }
+
       var content = document.querySelector('.content');
       if (content) {
         content.id = 'main-content';
@@ -290,9 +322,8 @@
 
       var toggle = document.querySelector('.sidebar-toggle');
       if (toggle) {
-        toggle.setAttribute('aria-label', '切换文档目录');
-        toggle.setAttribute('title', '切换文档目录');
         toggle.setAttribute('aria-controls', 'main-sidebar');
+        updateSidebarState();
       }
 
       var searchInput = document.querySelector('.search input');
@@ -307,7 +338,34 @@
         themeToggle.setAttribute('tabindex', '0');
         themeToggle.setAttribute('aria-label', '切换亮暗主题');
         themeToggle.setAttribute('title', '切换亮暗主题');
+
+        if (!themeToggle.dataset.keyboardBound) {
+          themeToggle.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              themeToggle.click();
+            }
+          });
+          themeToggle.dataset.keyboardBound = 'true';
+        }
+
+        if (!themeToggle.dataset.themeBound) {
+          themeToggle.addEventListener('click', function () {
+            window.requestAnimationFrame(updateThemeMeta);
+          });
+          themeToggle.dataset.themeBound = 'true';
+        }
       }
+
+      if (!document.body.dataset.sidebarObserverBound) {
+        new MutationObserver(updateSidebarState).observe(document.body, {
+          attributes: true,
+          attributeFilter: ['class']
+        });
+        document.body.dataset.sidebarObserverBound = 'true';
+      }
+
+      updateThemeMeta();
     }
 
     window.$docsify = {
