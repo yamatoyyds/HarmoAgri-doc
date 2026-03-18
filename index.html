@@ -86,7 +86,7 @@
     .sidebar-toggle {
       position: fixed;
       top: var(--control-offset-y);
-      left: calc(var(--sidebar-width) - (var(--control-size) / 2));
+      left: var(--sidebar-width);
       bottom: auto;
       width: var(--control-size);
       min-width: var(--control-size);
@@ -97,17 +97,18 @@
       align-items: center;
       justify-content: center;
       border: 1px solid var(--border-color);
-      border-radius: 0.9rem;
+      border-left: none;
+      border-radius: 0 0.9rem 0.9rem 0;
       z-index: 40;
       background-color: var(--surface-color);
       background-color: color-mix(in srgb, var(--surface-color) 92%, transparent);
       backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
     }
 
     body.close .sidebar-toggle {
-      left: var(--control-offset-x);
+      left: 0;
     }
 
     .sidebar-toggle span {
@@ -116,7 +117,7 @@
     }
 
     .sidebar-toggle:hover {
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+      box-shadow: 12px 14px 34px rgba(0, 0, 0, 0.12);
     }
 
     .sidebar-toggle:active,
@@ -231,11 +232,11 @@
       }
 
       .sidebar-toggle {
-        left: calc(var(--sidebar-width-tablet) - (var(--control-size) / 2));
+        left: var(--sidebar-width-tablet);
       }
 
       body.close .sidebar-toggle {
-        left: var(--control-offset-x);
+        left: 0;
       }
 
       .content {
@@ -272,7 +273,7 @@
       }
 
       .sidebar-toggle {
-        left: var(--control-offset-x);
+        left: 0;
         width: var(--control-size-mobile);
         min-width: var(--control-size-mobile);
         height: var(--control-size-mobile);
@@ -280,7 +281,7 @@
       }
 
       body.close .sidebar-toggle {
-        left: calc(min(18rem, calc(100vw - 3.5rem)) - (var(--control-size-mobile) / 2));
+        left: min(18rem, calc(100vw - 3.5rem));
         width: var(--control-size-mobile);
         min-width: var(--control-size-mobile);
         height: var(--control-size-mobile);
