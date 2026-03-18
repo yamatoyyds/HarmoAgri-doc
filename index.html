@@ -6,82 +6,261 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="基于OpenHarmony的智慧农业控制系统项目文档">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@3/dist/style.min.css">
   <style>
     :root {
       --theme-color: #42b983;
+      --sidebar-width: 19rem;
+      --sidebar-width-tablet: 17rem;
+      --header-offset: calc(4rem + env(safe-area-inset-top));
+      --surface-color: var(--background, #ffffff);
+      --border-color: var(--borderColor, rgba(0, 0, 0, 0.07));
+      --focus-ring: 0 0 0 3px rgba(66, 185, 131, 0.24);
     }
-    body, .sidebar, .search, .content, .markdown-section code {
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body,
+    .sidebar,
+    .search,
+    .content,
+    .markdown-section code,
+    .sidebar-toggle {
       transition: background-color 0.3s ease;
     }
 
-    /* sidebar toggle button: pinned to bottom of sidebar */
-    .sidebar-toggle {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      top: auto;
-      width: 300px;
-      height: 44px;
-      padding: 10px 12px;
-      box-sizing: border-box;
-      z-index: 30;
-      background: var(--background, #fff);
-      border-top: 1px solid var(--borderColor, rgba(0,0,0,0.07));
-      border-bottom: none;
-      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-    }
-    body.close .sidebar-toggle {
-      width: auto;
-      border-top: none;
-      background: transparent;
-      transform: translateX(0);
+    body {
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: rgba(66, 185, 131, 0.18);
     }
 
-    /* leave room at the bottom so content doesn't hide behind toggle */
+    .app-nav,
+    .sidebar,
+    .sidebar-toggle,
+    .search input,
+    a,
+    button {
+      touch-action: manipulation;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 100;
+      padding: 0.7rem 0.95rem;
+      border-radius: 0.75rem;
+      background: var(--theme-color);
+      color: #ffffff;
+      font-weight: 600;
+      text-decoration: none;
+      transform: translateY(calc(-100% - 0.75rem));
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus-visible {
+      transform: translateY(0);
+      box-shadow: var(--focus-ring);
+    }
+
     .sidebar {
-      padding-top: 0;
-      padding-bottom: 50px;
+      width: var(--sidebar-width);
+      padding-top: calc(1rem + env(safe-area-inset-top));
+      padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+      overscroll-behavior: contain;
       transition: transform 0.3s ease, background-color 0.3s ease;
       transform: translateX(0);
     }
 
-    /* slide out when closed */
-    body.close .sidebar {
-      transform: translateX(-300px);
+    .sidebar-toggle {
+      position: fixed;
+      top: calc(0.75rem + env(safe-area-inset-top));
+      left: calc(0.75rem + env(safe-area-inset-left));
+      bottom: auto;
+      width: 3rem;
+      min-width: 3rem;
+      height: 3rem;
+      padding: 0.625rem;
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      border-radius: 0.9rem;
+      z-index: 40;
+      background: color-mix(in srgb, var(--surface-color) 92%, transparent);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
     }
 
-    /* content area: override theme's `left` positioning with smooth transition */
+    .sidebar-toggle span {
+      bottom: auto;
+      left: auto;
+    }
+
+    .sidebar-toggle:hover {
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+    }
+
+    .sidebar-toggle:focus-visible,
+    .search input:focus-visible,
+    .sidebar a:focus-visible,
+    .app-nav a:focus-visible,
+    .markdown-section a:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-radius: 0.75rem;
+    }
+
     .content {
-      left: 300px;
+      left: var(--sidebar-width);
+      min-width: 0;
+      padding-top: max(1.5rem, env(safe-area-inset-top));
       transition: left 0.3s ease, background-color 0.3s ease;
     }
+
     body.close .content {
       left: 0;
-      transition: left 0.3s ease, background-color 0.3s ease;
     }
 
-    /* mobile: override theme's transform approach */
+    body.close .sidebar {
+      transform: translateX(calc(-1 * var(--sidebar-width)));
+    }
+
+    .markdown-section {
+      overflow-wrap: break-word;
+    }
+
+    .markdown-section h1,
+    .markdown-section h2,
+    .markdown-section h3,
+    .markdown-section h4,
+    .markdown-section h5,
+    .markdown-section h6 {
+      scroll-margin-top: var(--header-offset);
+      text-wrap: balance;
+    }
+
+    .markdown-section table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .markdown-section pre,
+    .markdown-section code {
+      overflow-wrap: anywhere;
+    }
+
+    @media screen and (max-width: 1100px) {
+      .sidebar {
+        width: var(--sidebar-width-tablet);
+      }
+
+      .content {
+        left: var(--sidebar-width-tablet);
+      }
+
+      body.close .sidebar {
+        transform: translateX(calc(-1 * var(--sidebar-width-tablet)));
+      }
+    }
+
     @media screen and (max-width: 768px) {
+      .sidebar {
+        width: min(18rem, calc(100vw - 3.5rem));
+        padding-top: calc(4.5rem + env(safe-area-inset-top));
+        box-shadow: 14px 0 36px rgba(0, 0, 0, 0.12);
+      }
+
       .content {
         left: 0;
+        padding-top: calc(4.75rem + env(safe-area-inset-top));
         transition: transform 0.3s ease, background-color 0.3s ease;
       }
+
       body.close .content {
         left: 0;
         transform: translateX(0);
-        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+
+      body.close .sidebar {
+        transform: translateX(calc(-100% - env(safe-area-inset-left) - 1rem));
+      }
+
+      .sidebar-toggle {
+        left: calc(0.75rem + env(safe-area-inset-left));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      body,
+      .sidebar,
+      .search,
+      .content,
+      .markdown-section code,
+      .sidebar-toggle,
+      .skip-link {
+        transition: none;
       }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">跳转到正文</a>
   <div id="app">加载中...</div>
   <script>
+    function enhanceDocsifyLayout() {
+      var content = document.querySelector('.content');
+      if (content) {
+        content.id = 'main-content';
+        content.setAttribute('role', 'main');
+        content.setAttribute('tabindex', '-1');
+      }
+
+      var sidebar = document.querySelector('.sidebar');
+      if (sidebar) {
+        sidebar.setAttribute('role', 'navigation');
+        sidebar.setAttribute('aria-label', '文档目录');
+      }
+
+      var toggle = document.querySelector('.sidebar-toggle');
+      if (toggle) {
+        toggle.setAttribute('aria-label', '切换文档目录');
+        toggle.setAttribute('title', '切换文档目录');
+      }
+
+      var searchInput = document.querySelector('.search input');
+      if (searchInput) {
+        searchInput.setAttribute('aria-label', '搜索文档');
+      }
+    }
+
     window.$docsify = {
       name: '智慧农业控制系统',
       loadSidebar: true,
       subMaxLevel: 3,
+      plugins: [
+        function (hook) {
+          hook.mounted(function () {
+            enhanceDocsifyLayout();
+          });
+
+          hook.doneEach(function () {
+            enhanceDocsifyLayout();
+          });
+        }
+      ],
       alias: {
         '/.*/_sidebar.md': '/_sidebar.md'
       },
