@@ -1,0 +1,48 @@
+:root {
+    /* App - 核心调色 */
+    --theme-color             : #ABD290; /* primary */
+    --mono-shade3             : #E1E4D9; /* onSurface: 标题 */
+    --mono-shade2             : #C4C8BB; /* onSurfaceVariant: 正文 */
+    --mono-tint2              : #43483E; /* outlineVariant: 分割线 */
+    --mono-tint3              : #1D211A; /* surfaceContainer: 块背景 */
+
+    /* Base - 基础样式 */
+    --base-background-color   : #11140E; /* surface/background */
+    --base-color              : #C4C8BB; /* onSurfaceVariant */
+    --hr-border               : 1px solid var(--mono-tint2); /* */
+
+    /* Content - 内容区域 */
+    --heading-color           : #ABD290; /* primary */
+    --blockquote-background   : #191D16; /* surfaceContainerLow */
+    --link-color              : #ABD290; /* primary */
+    --table-row-even-background         : var(--mono-tint3); /* tableRowBackground */
+    --table-row-odd-background          : var(--mono-tint2); /* tableRowBackground */
+    
+    /* Code - 代码块 */
+    --code-theme-background   : #43483E; /* surfaceVariant */
+    --code-inline-background  : #43483E; /* */
+    --code-inline-color       : #C6EEA9; /* onPrimaryContainer */
+
+    /* Sidebar - 侧边栏 */
+    --sidebar-background      : #191D16; /* surfaceContainerLow */
+    --sidebar-nav-link-color  : #C4C8BB; /* onSurfaceVariant */
+    --sidebar-nav-link-color--active: #ABD290; /* primary */
+
+    /* Plugins - 插件适配 */
+    --search-result-keyword-background: #2F4F1B; /* primaryContainer */
+    /* Plugin: Search - 基础容器与输入框 */
+    --search-background                      : #191D16; /* surfaceContainerLow */
+    --search-input-background-color          : #43483E; /* surfaceVariant */
+    --search-input-border-color              : #8E9286; /* outline */
+    --search-input-color                     : #E1E4D9; /* onSurface */
+    --search-input-placeholder-color         : #C4C8BB; /* onSurfaceVariant */
+
+    /* Results - 搜索结果 */
+    --search-result-heading-color            : #ABD290; /* primary */
+    --search-result-item-border-color        : #43483E; /* outlineVariant */
+    --search-result-item-color               : #C4C8BB; /* onSurfaceVariant */
+
+    /* Keyword - 关键词高亮 */
+    --search-result-keyword-background       : #2F4F1B; /* primaryContainer */
+    --search-result-keyword-color            : #C6EEA9; /* onPrimaryContainer */
+}
