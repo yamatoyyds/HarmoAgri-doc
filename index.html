@@ -96,8 +96,8 @@
       border: 1px solid var(--border-color);
       border-radius: 0.9rem;
       z-index: 40;
-      background: var(--surface-color);
-      background: color-mix(in srgb, var(--surface-color) 92%, transparent);
+      background-color: var(--surface-color);
+      background-color: color-mix(in srgb, var(--surface-color) 92%, transparent);
       backdrop-filter: blur(8px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
@@ -129,7 +129,7 @@
       justify-content: center;
       border: 1px solid var(--border-color);
       border-radius: 0.9rem;
-      background: var(--surface-color);
+      background-color: var(--surface-color);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       z-index: 40;
       cursor: pointer;
@@ -152,6 +152,7 @@
       margin: 0;
       color: transparent;
       pointer-events: none;
+      visibility: hidden;
     }
 
     .sidebar-toggle:focus-visible,
@@ -231,9 +232,11 @@
 
     @media screen and (max-width: 768px) {
       .sidebar {
+        left: 0;
         width: min(18rem, calc(100vw - 3.5rem));
         padding-top: calc(4.5rem + env(safe-area-inset-top));
         box-shadow: 14px 0 36px rgba(0, 0, 0, 0.12);
+        transform: translateX(calc(-100% - env(safe-area-inset-left) - 1rem));
       }
 
       .content {
@@ -248,11 +251,20 @@
       }
 
       body.close .sidebar {
-        transform: translateX(calc(-100% - env(safe-area-inset-left) - 1rem));
+        transform: translateX(0);
       }
 
       .sidebar-toggle {
         left: var(--control-offset-x);
+        width: var(--control-size);
+        min-width: var(--control-size);
+        padding: 0.625rem;
+      }
+
+      body.close .sidebar-toggle {
+        width: var(--control-size);
+        min-width: var(--control-size);
+        padding: 0.625rem;
       }
 
       #docsify-darklight-theme {
