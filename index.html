@@ -19,9 +19,12 @@
       --border-color: var(--borderColor, rgba(0, 0, 0, 0.07));
       --focus-ring: 0 0 0 3px rgba(66, 185, 131, 0.24);
       --control-size: 3rem;
+      --control-size-mobile: 2.5rem;
       --control-gap: 1rem;
       --control-offset-x: calc(0.75rem + env(safe-area-inset-left));
       --control-offset-y: calc(0.75rem + env(safe-area-inset-top));
+      --theme-icon-size: 1.15rem;
+      --theme-icon-size-mobile: 0.95rem;
     }
 
     html {
@@ -83,7 +86,7 @@
     .sidebar-toggle {
       position: fixed;
       top: var(--control-offset-y);
-      left: var(--control-offset-x);
+      left: calc(var(--sidebar-width) - (var(--control-size) / 2));
       bottom: auto;
       width: var(--control-size);
       min-width: var(--control-size);
@@ -101,6 +104,10 @@
       backdrop-filter: blur(8px);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
+    }
+
+    body.close .sidebar-toggle {
+      left: var(--control-offset-x);
     }
 
     .sidebar-toggle span {
@@ -133,6 +140,8 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       z-index: 40;
       cursor: pointer;
+      background-position: center;
+      background-size: var(--theme-icon-size) var(--theme-icon-size);
       transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
@@ -221,6 +230,14 @@
         width: var(--sidebar-width-tablet);
       }
 
+      .sidebar-toggle {
+        left: calc(var(--sidebar-width-tablet) - (var(--control-size) / 2));
+      }
+
+      body.close .sidebar-toggle {
+        left: var(--control-offset-x);
+      }
+
       .content {
         left: var(--sidebar-width-tablet);
       }
@@ -256,19 +273,25 @@
 
       .sidebar-toggle {
         left: var(--control-offset-x);
-        width: var(--control-size);
-        min-width: var(--control-size);
-        padding: 0.625rem;
+        width: var(--control-size-mobile);
+        min-width: var(--control-size-mobile);
+        height: var(--control-size-mobile);
+        padding: 0.5rem;
       }
 
       body.close .sidebar-toggle {
-        width: var(--control-size);
-        min-width: var(--control-size);
-        padding: 0.625rem;
+        left: calc(min(18rem, calc(100vw - 3.5rem)) - (var(--control-size-mobile) / 2));
+        width: var(--control-size-mobile);
+        min-width: var(--control-size-mobile);
+        height: var(--control-size-mobile);
+        padding: 0.5rem;
       }
 
       #docsify-darklight-theme {
         right: calc(0.75rem + env(safe-area-inset-right));
+        width: var(--control-size-mobile);
+        height: var(--control-size-mobile);
+        background-size: var(--theme-icon-size-mobile) var(--theme-icon-size-mobile);
       }
     }
 
