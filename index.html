@@ -123,7 +123,6 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--border-color);
       border-radius: 0.9rem;
       z-index: 40;
       background-color: var(--surface-color);
@@ -157,7 +156,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--border-color);
       border-radius: 0.9rem;
       background-color: var(--surface-color);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -249,16 +247,18 @@
     }
 
     .sidebar-search-shell {
-      margin: 0 1rem 1rem;
-      padding: 0.75rem;
-      border-radius: 1rem;
-      background: color-mix(in srgb, var(--codeBackgroundColor, #f8f8f8) 82%, var(--surface-color) 18%);
+      display: flex;
+      align-items: center;
+      min-height: var(--topbar-height);
+      margin: 0;
+      padding: env(safe-area-inset-top) 1rem 0;
     }
 
     .sidebar-search-shell .search {
       border: 0 !important;
       background: transparent;
       padding: 0;
+      width: 100%;
     }
 
     .sidebar-search-shell .search .input-wrap {
@@ -267,11 +267,13 @@
 
     .sidebar-search-shell .search input {
       width: 100% !important;
+      min-height: var(--control-size);
       margin: 0 !important;
       border: 0 !important;
       background: transparent !important;
       text-indent: 0;
       box-shadow: none;
+      border-radius: 0;
     }
 
     @media screen and (max-width: 1100px) {
@@ -306,7 +308,7 @@
       .sidebar {
         left: 0;
         width: min(18rem, calc(100vw - 3.5rem));
-        padding-top: calc(var(--topbar-height) + 0.75rem + env(safe-area-inset-top));
+        padding-top: 0;
         box-shadow: 14px 0 36px rgba(0, 0, 0, 0.12);
         transform: translateX(calc(-100% - env(safe-area-inset-left) - 1rem));
       }
@@ -348,6 +350,15 @@
         width: var(--control-size-mobile);
         height: var(--control-size-mobile);
         background-size: var(--theme-icon-size-mobile) var(--theme-icon-size-mobile);
+      }
+
+      .sidebar-search-shell {
+        min-height: calc(var(--topbar-height) + env(safe-area-inset-top));
+        padding: env(safe-area-inset-top) 1rem 0;
+      }
+
+      .sidebar-search-shell .search input {
+        min-height: var(--control-size-mobile);
       }
     }
 
