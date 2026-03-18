@@ -12,20 +12,19 @@
   <style>
     :root {
       --theme-color: #42b983;
-      --sidebar-width: 19rem;
+      --sidebar-width: 18.5rem;
       --sidebar-width-tablet: 17rem;
-      --topbar-height: 4rem;
+      --topbar-height: 3.75rem;
       --header-offset: calc(var(--topbar-height) + 1rem + env(safe-area-inset-top));
       --surface-color: var(--background, #ffffff);
       --border-color: var(--borderColor, rgba(0, 0, 0, 0.07));
       --focus-ring: 0 0 0 3px rgba(66, 185, 131, 0.24);
-      --control-size: 3rem;
-      --control-size-mobile: 2.5rem;
-      --control-gap: 1rem;
-      --control-offset-x: calc(0.75rem + env(safe-area-inset-left));
-      --control-offset-y: calc(0.75rem + env(safe-area-inset-top));
-      --theme-icon-size: 1rem;
-      --theme-icon-size-mobile: 0.8rem;
+      --control-size: 2.5rem;
+      --control-size-mobile: 2.25rem;
+      --shell-padding: 1rem;
+      --shell-padding-mobile: 0.75rem;
+      --theme-icon-size: 0.95rem;
+      --theme-icon-size-mobile: 0.75rem;
     }
 
     html {
@@ -34,10 +33,12 @@
 
     body,
     .sidebar,
-    .search,
     .content,
     .markdown-section code,
-    .sidebar-toggle {
+    .page-topbar,
+    .sidebar-topbar,
+    .sidebar-toggle,
+    #docsify-darklight-theme {
       transition: background-color 0.3s ease;
     }
 
@@ -49,7 +50,6 @@
     .app-nav,
     .sidebar,
     .sidebar-toggle,
-    .search input,
     a,
     button {
       touch-action: manipulation;
@@ -81,20 +81,11 @@
       right: 0;
       left: var(--sidebar-width);
       height: calc(var(--topbar-height) + env(safe-area-inset-top));
-      padding: env(safe-area-inset-top) var(--control-gap) 0;
+      padding: env(safe-area-inset-top) var(--shell-padding) 0;
       border-bottom: 1px solid var(--border-color);
-      background-color: color-mix(in srgb, var(--surface-color) 94%, transparent);
-      backdrop-filter: blur(12px);
+      background-color: var(--surface-color);
       z-index: 35;
       transition: left 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
-    }
-
-    .page-topbar::before {
-      content: "";
-      position: absolute;
-      inset: env(safe-area-inset-top) var(--control-gap) 0;
-      border-radius: 0.9rem;
-      background: transparent;
     }
 
     body.close .page-topbar {
@@ -108,10 +99,9 @@
       display: flex;
       align-items: center;
       min-height: calc(var(--topbar-height) + env(safe-area-inset-top));
-      padding: env(safe-area-inset-top) 1rem 0;
+      padding: env(safe-area-inset-top) var(--shell-padding) 0;
       border-bottom: 1px solid var(--border-color);
-      background-color: color-mix(in srgb, var(--surface-color) 94%, transparent);
-      backdrop-filter: blur(12px);
+      background-color: var(--surface-color);
     }
 
     .sidebar {
@@ -119,38 +109,39 @@
       padding-top: 0;
       padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
       overscroll-behavior: contain;
-      transition: transform 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
       transform: translateX(0);
     }
 
     .sidebar-toggle {
       position: fixed;
       top: calc(env(safe-area-inset-top) + ((var(--topbar-height) - var(--control-size)) / 2));
-      left: calc(var(--sidebar-width) + 0.75rem);
+      left: calc(var(--sidebar-width) + var(--shell-padding));
       bottom: auto;
       width: var(--control-size);
       min-width: var(--control-size);
       height: var(--control-size);
-      padding: 0.625rem;
+      padding: 0.5rem;
       box-sizing: border-box;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 0.9rem;
       z-index: 40;
-      background-color: var(--surface-color);
-      background-color: color-mix(in srgb, var(--surface-color) 92%, transparent);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      transition: left 0.3s ease, transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      transition: left 0.3s ease, transform 0.2s ease, background-color 0.2s ease;
     }
 
     .sidebar-toggle span {
       display: block;
       width: 1rem;
       height: 2px;
-      margin-bottom: 0.22rem;
-      background-color: var(--theme-color);
+      margin-bottom: 0.24rem;
+      border-radius: 999px;
+      background-color: currentColor;
+      color: var(--textColor, #34495e);
       bottom: auto;
       left: auto;
     }
@@ -160,7 +151,7 @@
     }
 
     .sidebar-toggle:hover {
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+      background: rgba(0, 0, 0, 0.04);
     }
 
     .sidebar-toggle:active,
@@ -175,24 +166,20 @@
       left: auto;
       width: var(--control-size);
       height: var(--control-size);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       border-radius: 0.9rem;
-      background-color: var(--surface-color);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      background-color: transparent;
+      box-shadow: none;
       z-index: 40;
       cursor: pointer;
       background-image: var(--toogleImage);
       background-repeat: no-repeat;
       background-position: center;
       background-size: var(--theme-icon-size) var(--theme-icon-size);
-      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      transition: background-color 0.2s ease, transform 0.2s ease;
     }
 
     #docsify-darklight-theme:hover {
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
-      transform: translateY(-1px);
+      background-color: rgba(0, 0, 0, 0.04);
     }
 
     #docsify-darklight-theme:focus-visible {
@@ -221,7 +208,7 @@
     .content {
       left: var(--sidebar-width);
       min-width: 0;
-      padding-top: calc(var(--topbar-height) + 0.75rem + env(safe-area-inset-top));
+      padding-top: calc(var(--topbar-height) + env(safe-area-inset-top));
       transition: left 0.3s ease, background-color 0.3s ease;
     }
 
@@ -235,6 +222,9 @@
 
     .markdown-section {
       overflow-wrap: break-word;
+      margin: 0 auto;
+      max-width: 56rem;
+      padding: 2rem 2rem 3rem;
     }
 
     .markdown-section h1,
@@ -289,6 +279,62 @@
       text-indent: 0;
       box-shadow: none;
       border-radius: 0;
+      color: var(--textColor);
+      font-size: 0.95rem;
+    }
+
+    .sidebar-topbar .search input::placeholder {
+      color: color-mix(in srgb, var(--textColor) 56%, transparent);
+    }
+
+    .sidebar > h1 {
+      margin: 1rem 1rem 0.75rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .sidebar > h1 a {
+      color: inherit;
+    }
+
+    .sidebar .sidebar-nav {
+      padding: 0 0 1.5rem;
+    }
+
+    .sidebar ul {
+      margin-left: 0;
+      padding: 0 1rem;
+    }
+
+    .sidebar li {
+      margin: 0.2rem 0;
+    }
+
+    .sidebar li > p {
+      margin: 1rem 0 0.35rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--textColor) 62%, transparent);
+    }
+
+    .sidebar ul li a {
+      padding: 0.34rem 0;
+      border-right: 0;
+      white-space: normal;
+      line-height: 1.45;
+    }
+
+    .sidebar ul li.active > a {
+      border-right: 0;
+      font-weight: 600;
+    }
+
+    .content,
+    .page-topbar {
+      background: var(--surface-color);
     }
 
     @media screen and (max-width: 1100px) {
@@ -301,7 +347,7 @@
       }
 
       .sidebar-toggle {
-        left: calc(var(--sidebar-width-tablet) + 0.75rem);
+        left: calc(var(--sidebar-width-tablet) + var(--shell-padding));
       }
 
       .content {
@@ -316,8 +362,8 @@
     @media screen and (max-width: 768px) {
       .page-topbar {
         left: 0;
-        padding-left: var(--control-offset-x);
-        padding-right: calc(0.75rem + env(safe-area-inset-right));
+        padding-left: var(--shell-padding-mobile);
+        padding-right: var(--shell-padding-mobile);
       }
 
       .sidebar {
@@ -330,7 +376,7 @@
 
       .content {
         left: 0;
-        padding-top: calc(var(--topbar-height) + 0.75rem + env(safe-area-inset-top));
+        padding-top: calc(var(--topbar-height) + env(safe-area-inset-top));
         transition: transform 0.3s ease, background-color 0.3s ease;
       }
 
@@ -345,23 +391,16 @@
 
       .sidebar-toggle {
         top: calc(env(safe-area-inset-top) + ((var(--topbar-height) - var(--control-size-mobile)) / 2));
-        left: var(--control-offset-x);
+        left: var(--shell-padding-mobile);
         width: var(--control-size-mobile);
         min-width: var(--control-size-mobile);
         height: var(--control-size-mobile);
-        padding: 0.5rem;
-      }
-
-      body.close .sidebar-toggle {
-        width: var(--control-size-mobile);
-        min-width: var(--control-size-mobile);
-        height: var(--control-size-mobile);
-        padding: 0.5rem;
+        padding: 0.4rem;
       }
 
       #docsify-darklight-theme {
         top: calc(env(safe-area-inset-top) + ((var(--topbar-height) - var(--control-size-mobile)) / 2));
-        right: calc(0.75rem + env(safe-area-inset-right));
+        right: var(--shell-padding-mobile);
         width: var(--control-size-mobile);
         height: var(--control-size-mobile);
         background-size: var(--theme-icon-size-mobile) var(--theme-icon-size-mobile);
@@ -369,11 +408,15 @@
 
       .sidebar-topbar {
         min-height: calc(var(--topbar-height) + env(safe-area-inset-top));
-        padding: env(safe-area-inset-top) 1rem 0;
+        padding: env(safe-area-inset-top) var(--shell-padding-mobile) 0;
       }
 
       .sidebar-topbar .search input {
         min-height: var(--control-size-mobile);
+      }
+
+      .markdown-section {
+        padding: 1.5rem 1rem 2.5rem;
       }
     }
 
